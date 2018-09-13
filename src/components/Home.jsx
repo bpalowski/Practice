@@ -1,27 +1,26 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import ConfirmationQuestions from './ConfirmationQuestions';
-import NewTicketForm from './NewTicketForm';
+import NewForm from'./NewForm';
+import PropTypes from 'prop-types';
 
-
-class NewTicketControl extends React.Component {
+class Home extends React.Component{
 
   constructor(props) {
     super(props);
-    this.state = {
-      formVisibleOnPage: false
+    this.state ={
+      formVisable: false
     };
     this.handleTroubleshootingConfirmation = this.handleTroubleshootingConfirmation.bind(this);
   }
 
   handleTroubleshootingConfirmation(){
-    this.setState({formVisibleOnPage: true});
+    this.setState({formVisable: true});
   }
 
   render(){
     let currentlyVisibleContent = null;
-    if (this.state.formVisibleOnPage){
-      currentlyVisibleContent = <NewTicketForm onNewTicketCreation={this.props.onNewTicketCreation}/>;
+    if (this.state.formVisable){
+      currentlyVisibleContent = <NewForm onHome={this.props.onHome}/>;
     } else {
       currentlyVisibleContent = <ConfirmationQuestions onTroubleshootingConfirmation={this.handleTroubleshootingConfirmation}/>;
     }
@@ -33,8 +32,8 @@ class NewTicketControl extends React.Component {
   }
 }
 
-NewTicketControl.propTypes = {
-  onNewTicketCreation: PropTypes.func
+Home.propTypes = {
+  onHome: PropTypes.func
 };
 
-export default NewTicketControl;
+export default Home;

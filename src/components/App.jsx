@@ -1,9 +1,9 @@
 import React from 'react';
-import Header from './Header';
-import TicketList from './TicketList';
 import { Switch, Route } from 'react-router-dom';
-import NewTicketControl from './NewTicketControl';
 import Error404 from './Error404';
+import Home from'./Home';
+import Header from'./Header';
+import List from './List';
 
 
 class App extends React.Component {
@@ -11,29 +11,29 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      masterTicketList: []
+      masterList: []
     };
-    this.handleAddingNewTicketToList = this.handleAddingNewTicketToList.bind(this);
+    this.handleAddingNewItemToList = this.handleAddingNewItemToList.bind(this);
   }
 
-  handleAddingNewTicketToList(newTicket){
-    var newMasterTicketList = this.state.masterTicketList.slice();
-    newMasterTicketList.push(newTicket);
-    this.setState({masterTicketList: newMasterTicketList});
+  handleAddingNewItemToList(newItem){
+    var newMasterList = this.state.masterList.slice();
+    newMasterList.push(newItem);
+    this.setState({masterList: newMasterList});
   }
 
-  render() {
+  render(){
     return(
       <div>
         <Header/>
         <Switch>
-          <Route exact path='/' render={()=><TicketList ticketList={this.state.masterTicketList} />} />
-          <Route path='/newticket' render={()=><NewTicketControl onNewTicketCreation={this.handleAddingNewTicketToList} />} />
-          <Route component={Error404} />
+          <Route exact path='/home' render={()=><Home onHome={this.handleAddingNewItemToList}/>} />
+          <Route exact path='/' render={()=><List list={this.state.masterList} />} />
+          <Route componet={Error404}/>
         </Switch>
-
       </div>
     );
+  // }
   }
 }
 

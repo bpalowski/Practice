@@ -1,18 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { v4 } from 'uuid';
 
+function NewForm(props) {
 
-function NewTicketForm(props){
   let _names = null;
   let _location = null;
   let _issue = null;
-  function handleNewTicketFormSubmission(event){
+
+
+  function handleNewTicketFormSubmission(event) {
     event.preventDefault();
-    props.onNewTicketCreation({names: _names.value, location: _location.value, issue: _issue.value, id: v4()});
+
+    props.onHome({names: _names.value, location: _location.value, issue: _issue.value});
+
     _names.value = '';
     _location.value = '';
     _issue.value = '';
+
   }
   return (
     <div>
@@ -20,26 +24,28 @@ function NewTicketForm(props){
         <input
           type='text'
           id='names'
-          placeholder='Pair Names'
+          placeholder='Names'
           ref={(input) => {_names = input;}}/>
         <input
           type='text'
           id='location'
           placeholder='Location'
           ref={(input) => {_location = input;}}/>
-        <textarea
+        <input
+          type='text'
           id='issue'
           placeholder='Describe your issue.'
-          ref={(textarea) => {_issue = textarea;}}/>
+          ref={(input) => {_issue = input;}}/>
+
         <button type='submit'>Help!</button>
       </form>
     </div>
   );
 }
 
-NewTicketForm.propTypes = {
-  onNewTicketCreation: PropTypes.func
+NewForm.propTypes = {
+  onHome: PropTypes.func
 };
 
 
-export default NewTicketForm;
+export default NewForm;
